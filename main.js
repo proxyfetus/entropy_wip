@@ -89,6 +89,7 @@ var blender;
 // } );
 
 
+// * Setup axis for 
 let axis = new THREE.AxesHelper(10)
 scene.add(axis)
 
@@ -98,18 +99,23 @@ loader.load( 'altar0__1.glb', function ( gltf )
 
   
   
-  
-  
+  // * Setup material to all object have transparent material
+
+  blender.children.forEach(element => 
+  {
+    if(element.type == "Mesh")
+     {
+      // console.log(element);  
+      element.material = material
+    }
+
+
+  });
+
+
+
+
 	scene.add( blender );
-  blender.children[0].material = material;
-  blender.children[0].position.x = 0
-  // blender.children[0].material = new THREE.MeshBasicMaterial({ color: 'red'})
-
-  // blender.position.x = 2
-  // blender.position.y = 2
-
-  // console.log(blender
-
 
 } );
 
@@ -139,12 +145,15 @@ scene.add(lightD);
 
 //camera
 const camera = new THREE.PerspectiveCamera(45, sizes.width / sizes.height, 0.1, 1000);
-camera.position.z =30;
+camera.position.z =10;
 scene.add(camera);
 
 //Renderer
 const canvas = document.querySelector('.webgl');
-const renderer = new THREE.WebGLRenderer({ canvas});
+const renderer = new THREE.WebGLRenderer({ 
+  canvas,
+  antialias: true
+});
 renderer.setSize(sizes.width, sizes.height);
 // renderer.setClearColor(new THREE.Color(0x287f5))
 
@@ -160,16 +169,21 @@ renderer.render(scene, camera);
 //Controls
 const controls = new OrbitControls(camera,canvas)
 
-  //resize
-  window.addEventListener('resize', ()=> {
-    //update sizes
-    sizes.width = window.innerWidth
-    sizes.height = window.innerHeight
-    //update camera
-    camera.updateProjectionMatrix()
-    camera.aspect = sizes.width/sizes.height
-    renderer.setSize(sizes.width,sizes.height)
-  })
+//resize
+window.addEventListener('resize', ()=> {
+  //update sizes
+  sizes.width = window.innerWidth
+  sizes.height = window.innerHeight
+  //update camera
+  s
+  camera.aspect = sizes.width/sizes.height
+  camera.updateProjectionMatrix()
+
+
+  renderer.setSize(sizes.width,sizes.height)
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2  ))
+
+})
 
   const loop = () => {
 
