@@ -81,12 +81,44 @@ sphere.material.side = THREE.DoubleSide;
 const loader = new GLTFLoader();
 var blender;
 
-loader.load( 'jelly.glb', function ( gltf ) {
+// loader.load( 'jelly.glb', function ( gltf ) {
+//   blender = gltf.scene;
+// 	scene.add( blender );
+//   blender.children[0].material = material;
+//   blender.children[0].position.x = 7
+// } );
+
+
+let axis = new THREE.AxesHelper(10)
+scene.add(axis)
+
+loader.load( 'altar0__1.glb', function ( gltf ) 
+{
   blender = gltf.scene;
+
+  
+  
+  
+  
 	scene.add( blender );
   blender.children[0].material = material;
-  blender.children[0].position.x = 7
+  blender.children[0].position.x = 0
+  // blender.children[0].material = new THREE.MeshBasicMaterial({ color: 'red'})
+
+  // blender.position.x = 2
+  // blender.position.y = 2
+
+  // console.log(blender
+
+
 } );
+
+
+
+
+
+
+
 
 //sizes
 const sizes = {
